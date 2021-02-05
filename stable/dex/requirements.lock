@@ -2,5 +2,5 @@ dependencies:
 - name: dex-controller
   repository: https://mesosphere.github.io/dex-controller/charts
   version: 0.6.6
-digest: sha256:526e165b253ba87129f55bd31c818ca7c099026165390ec80c8ddb4397990bc1
-generated: "2021-02-04T21:30:19.782555348-08:00"
+digest: sha256:676d1b95f26f23f4e73343bb9aeb199d6531916571b132558e1e84c37aba68f4
+generated: "2021-02-05T13:23:27.822680202-08:00"

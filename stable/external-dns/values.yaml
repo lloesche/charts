@@ -13,7 +13,7 @@
 image:
   registry: docker.io
   repository: bitnami/external-dns
-  tag: 0.7.0-debian-10-r0
+  tag: 0.7.6-debian-10-r0
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -49,7 +49,7 @@ provider: aws
 ##
 ## Limit sources of endpoints to a specific namespace (default: all namespaces)
 ##
-namespace: ""
+namespace: ''
 ## Templated strings that are used to generate DNS names from sources that don't define a hostname themselves
 ##
 fqdnTemplates: []
@@ -75,11 +75,11 @@ aws:
   ## AWS credentials
   ##
   credentials:
-    secretKey: ""
-    accessKey: ""
+    secretKey: ''
+    accessKey: ''
     ## pre external-dns 0.5.9 home dir should be `/root/.aws`
     ##
-    mountPath: "/.aws"
+    mountPath: /.aws
     ## Use an existing secret with key "credentials" defined.
     ## This ignores aws.credentials.secretKey, and aws.credentials.accessKey
     ##
@@ -87,13 +87,13 @@ aws:
 
   ## AWS region
   ##
-  region: "us-east-1"
+  region: us-east-1
   ## Zone Filter. Available values are: public, private
   ##
-  zoneType: ""
+  zoneType: ''
   ## AWS Role to assume
   ##
-  assumeRoleArn: ""
+  assumeRoleArn: ''
   ## Maximum number of changes that will be applied in each batch
   ##
   batchChangeSize: 1000
@@ -102,10 +102,10 @@ aws:
   zoneTags: []
   ## Enable AWS Prefer CNAME. Available values are: true, false
   ##
-  preferCNAME: ""
+  preferCNAME: ''
   ## Enable AWS evaluation of target health. Available values are: true, false
   ##
-  evaluateTargetHealth: ""
+  evaluateTargetHealth: ''
 ## Azure configuration to be set via arguments/env. variables
 ##
 azure:
@@ -114,25 +114,25 @@ azure:
   ##
   ## Deprecated: please use tenantId, subscriptionId, aadClientId and aadClientSecret values instead.
   ##
-  secretName: ""
+  secretName: ''
   ## Azure resource group to use
   ##
-  cloud: ""
+  cloud: ''
   ## Azure Cloud to use
   ##
-  resourceGroup: ""
+  resourceGroup: ''
   ## Azure tenant ID to use
   ##
-  tenantId: ""
+  tenantId: ''
   ## Azure subscription ID to use
   ##
-  subscriptionId: ""
+  subscriptionId: ''
   ## Azure Application Client ID to use
   ##
-  aadClientId: ""
+  aadClientId: ''
   ## Azure Application Client Secret to use
   ##
-  aadClientSecret: ""
+  aadClientSecret: ''
   ## If you use Azure MSI, this should be set to true
   ##
   useManagedIdentityExtension: false
@@ -142,17 +142,17 @@ azure:
 cloudflare:
   ## `CF_API_TOKEN` to set in the environment
   ##
-  apiToken: ""
+  apiToken: ''
   ## `CF_API_KEY` to set in the environment
   ##
-  apiKey: ""
+  apiKey: ''
   ## Use an existing secret with keys "cloudflare_api_token" or "cloudflare_api_key" defined.
   ## This ignores cloudflare.apiToken, and cloudflare.apiKey
   ##
   # secretName:
   ## `CF_API_EMAIL` to set in the environment
   ##
-  email: ""
+  email: ''
   ## Enable the proxy feature of Cloudflare
   ##
   proxied: true
@@ -164,7 +164,7 @@ coredns:
   ## Secure (https) endpoints can be used as well, in that case `etcdTLS` section
   ## should be filled in accordingly
   ##
-  etcdEndpoints: "http://etcd-extdns:2379"
+  etcdEndpoints: http://etcd-extdns:2379
   ## Configuration of the secure communication and client authentication to the etcd cluster
   ## If enabled all the values under this key must hold a valid data
   ##
@@ -177,21 +177,21 @@ coredns:
     ## ref (secret creation):
     ##  https://github.com/bitnami/charts/tree/master/bitnami/etcd#configure-certificates-for-client-communication
     ##
-    secretName: "etcd-client-certs"
+    secretName: etcd-client-certs
     ## Location of the mounted certificates inside external-dns pod
     ##
-    mountPath: "/etc/coredns/tls/etcd"
+    mountPath: /etc/coredns/tls/etcd
     ## CA PEM file used to sign etcd TLS cert, should exist in the secret provided above
     ##
-    caFilename: "ca.crt"
+    caFilename: ca.crt
     ## Certificate PEM file, should exist in the secret provided above
     ## Will be used by external-dns to authenticate against etcd
     ##
-    certFilename: "cert.pem"
+    certFilename: cert.pem
     ## Private key PEM file, should exist in the secret provided above
     ## Will be used by external-dns to authenticate against etcd
     ##
-    keyFilename: "key.pem"
+    keyFilename: key.pem
 
 ## OpenStack Designate provider configuration to be set via arguments/env. variables
 ##
@@ -202,13 +202,13 @@ designate:
     enabled: false
     ## The content of the custom CA file
     ##
-    content: ""
+    content: ''
     ## Location to mount custom CA
     ##
-    mountPath: "/config/designate"
+    mountPath: /config/designate
     ## Custom CA filename
     ##
-    filename: "designate-ca.pem"
+    filename: designate-ca.pem
 
   ## Use a host path custom CA (optional)
   ##  This conflicts setting the above customCA to true and chart rendering will fail if you set customCA to true and specify customCAHostPath
@@ -227,7 +227,7 @@ designate:
 digitalocean:
   ## `DO_TOKEN` to set in the environment
   ##
-  apiToken: ""
+  apiToken: ''
   ## Use an existing secret with key "digitalocean_api_token" defined.
   ## This ignores digitalocean.apiToken
   ##
@@ -238,37 +238,37 @@ digitalocean:
 google:
   ## Google Project to use
   ##
-  project: ""
+  project: ''
   ## Google Application Credentials
   ##
-  serviceAccountSecret: ""
-  serviceAccountSecretKey: "credentials.json"
-  serviceAccountKey: ""
+  serviceAccountSecret: ''
+  serviceAccountSecretKey: credentials.json
+  serviceAccountKey: ''
 
 ## Infoblox configuration to be set via arguments/env. variables
 ##
 infoblox:
   ## Required keys
   ##
-  wapiUsername: "admin"
-  wapiPassword: ""
-  gridHost: ""
+  wapiUsername: admin
+  wapiPassword: ''
+  gridHost: ''
   ## Optional keys
   ##
-  domainFilter: ""
+  domainFilter: ''
   noSslVerify: false
-  wapiPort: ""
-  wapiVersion: ""
-  wapiConnectionPoolSize: ""
-  wapiHttpTimeout: ""
+  wapiPort: ''
+  wapiVersion: ''
+  wapiConnectionPoolSize: ''
+  wapiHttpTimeout: ''
 
 ## RFC 2136 configuration to be set via arguments/env. variables
 ##
 rfc2136:
-  host: ""
+  host: ''
   port: 53
-  zone: ""
-  tsigSecret: ""
+  zone: ''
+  tsigSecret: ''
   tsigSecretAlg: hmac-sha256
   tsigKeyname: externaldns-key
   tsigAxfr: true
@@ -276,19 +276,19 @@ rfc2136:
 ## PowerDNS configuration to be set via arguments/env. variables
 ##
 pdns:
-  apiUrl: ""
-  apiPort: "8081"
-  apiKey: ""
+  apiUrl: ''
+  apiPort: '8081'
+  apiKey: ''
 
 ## TransIP configuration to be set via arguments/env. variables
 ##
 transip:
   ## Account name to be used
   ##
-  account: ""
+  account: ''
   ##
   ## API key that is authorised for the account
-  apiKey: ""
+  apiKey: ''
 
 ## Limit possible target zones by domain suffixes (optional)
 ##
@@ -298,7 +298,7 @@ domainFilters: []
 zoneIdFilters: []
 ## Filter sources managed by external-dns via annotation using label selector semantics (optional)
 ##
-annotationFilter: ""
+annotationFilter: ''
 ## When enabled, prints DNS record changes rather than actually performing them
 ##
 dryRun: false
@@ -307,7 +307,7 @@ dryRun: false
 triggerLoopOnEvent: false
 ## Adjust the interval for DNS updates
 ##
-interval: "1m"
+interval: 1m
 ## Verbosity of the ExternalDNS logs. Available values are:
 ## - panic, debug, info, warn, error, fatal
 ##
@@ -322,10 +322,10 @@ policy: upsert-only
 ## Registry Type. Available types are: txt, noop
 ## ref: https://github.com/kubernetes-sigs/external-dns/blob/master/docs/proposal/registry.md
 ##
-registry: "txt"
+registry: txt
 ## TXT Registry Identifier
 ##
-txtOwnerId: ""
+txtOwnerId: ''
 ## Prefix to create a TXT record with a name following the pattern prefix.<CNAME record>
 ##
 # txtPrefix: ""
@@ -373,7 +373,7 @@ podAnnotations: {}
 podLabels: {}
 ## Pod priority class name
 ##
-priorityClassName: ""
+priorityClassName: ''
 
 ## Options for the source type "crd"
 ##
@@ -381,8 +381,8 @@ crd:
   ## Install and use the integrated DNSEndpoint CRD
   create: false
   ## Change these to use an external DNSEndpoint CRD (E.g. from kubefed)
-  apiversion: ""
-  kind: ""
+  apiversion: ''
+  kind: ''
 
 ## Kubernetes svc configutarion
 ##
